@@ -12,20 +12,29 @@ import math
 DEFAULT_LENGTH = 255
 FORMATS = {
     "c": {
-        "block": {"pre": "char badchars[] = \n", "post": '";'},
+        "block": {"pre": "char badchars[] =\n", "post": '";'},
         "line": {"pre": '  "', "post": '"'},
+        "char": {"esc": "\\", "delim": ""},
     },
     "js": {
-        "block": {"pre": "var badchars = \n", "post": '";'},
+        "block": {"pre": "var badchars =\n", "post": '";'},
         "line": {"pre": '  "', "post": '" +'},
+        "char": {"esc": "\\", "delim": ""},
     },
     "php": {
-        "block": {"pre": "$badchars = \n", "post": '";'},
+        "block": {"pre": "$badchars =\n", "post": '";'},
         "line": {"pre": '  "', "post": '" +'},
+        "char": {"esc": "\\", "delim": ""},
+    },
+    "bash": {
+        "block": {"pre": "badchars=(\n", "post": "\n)"},
+        "line": {"pre": "  ", "post": ""},
+        "char": {"esc": "\\\\", "delim": " "},
     },
     "python": {
         "block": {"pre": "badchars = (\n", "post": '"\n)'},
         "line": {"pre": '  "', "post": '"'},
+        "char": {"esc": "\\", "delim": ""},
     },
 }
 
@@ -65,7 +74,9 @@ def print_badchars(length, format=None):
                 if count == length:
                     break
                 count += 1
-                sys.stdout.write("\\x" + "{:02x}".format(count))
+                sys.stdout.write(FORMATS[format]["char"]["esc"] + "x" + "{:02x}".format(count))
+                if count % linebreak and count != length:
+                    sys.stdout.write(FORMATS[format]["char"]["delim"])
             if count == length:
                 break
             sys.stdout.write(FORMATS[format]["line"]["post"])
@@ -102,7 +113,7 @@ def main():
         "-v",
         "--version",
         action="version",
-        version="%(prog)s 0.2 by cytopia",
+        version="%(prog)s 0.3 by cytopia",
         help="Show version information,",
     )
     parser.add_argument(

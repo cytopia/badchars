@@ -5,7 +5,7 @@ endif
 # -------------------------------------------------------------------------------------------------
 # Default configuration
 # -------------------------------------------------------------------------------------------------
-.PHONY: help build clean
+.PHONY: help lint pycodestyle pydocstyle black dist sdist bdist build checkbuild deploy autoformat clean
 
 
 VERSION = 2.7
@@ -74,11 +74,6 @@ build:
 		python:$(VERSION)-alpine \
 		python setup.py build
 
-
-# -------------------------------------------------------------------------------------------------
-# Publish Targets
-# -------------------------------------------------------------------------------------------------
-
 checkbuild:
 	docker run \
 		--rm \
@@ -88,6 +83,11 @@ checkbuild:
 		python:$(VERSION)-alpine \
 		sh -c "pip install twine \
 		&& twine check dist/*"
+
+
+# -------------------------------------------------------------------------------------------------
+# Publish Targets
+# -------------------------------------------------------------------------------------------------
 
 deploy:
 	docker run \
@@ -104,6 +104,13 @@ deploy:
 # Misc Targets
 # -------------------------------------------------------------------------------------------------
 
+autoformat:
+	docker run \
+		--rm \
+		$$(tty -s && echo "-it" || echo) \
+		-v $(PWD):/data \
+		-w /data \
+		cytopia/black -l 100 badchars
 clean:
 	-rm -rf badchars.egg-info/
 	-rm -rf dist/
