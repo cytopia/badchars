@@ -1,0 +1,137 @@
+#!/usr/bin/env python
+"""Print badchars."""
+
+import sys
+import argparse
+import math
+
+
+# -------------------------------------------------------------------------------------------------
+# GLOBALS
+# -------------------------------------------------------------------------------------------------
+DEFAULT_LENGTH = 255
+FORMATS = {
+    "c": {
+        "block": {"pre": "char badchars[] = \n", "post": '";'},
+        "line": {"pre": '  "', "post": '"'},
+    },
+    "js": {
+        "block": {"pre": "var badchars = \n", "post": '";'},
+        "line": {"pre": '  "', "post": '" +'},
+    },
+    "php": {
+        "block": {"pre": "$badchars = \n", "post": '";'},
+        "line": {"pre": '  "', "post": '" +'},
+    },
+    "python": {
+        "block": {"pre": "badchars = (\n", "post": '"\n)'},
+        "line": {"pre": '  "', "post": '"'},
+    },
+}
+
+
+# -------------------------------------------------------------------------------------------------
+# DECORATOR
+# -------------------------------------------------------------------------------------------------
+def formatOutput(f):
+    """Decorate/format the output of badchars."""
+
+    def new_f(length, format):
+        if format is not None:
+            sys.stdout.write(FORMATS[format]["block"]["pre"])
+        f(length, format)
+        if format is not None:
+            sys.stdout.write(FORMATS[format]["block"]["post"])
+
+    return new_f
+
+
+# -------------------------------------------------------------------------------------------------
+# FUNCTIONS
+# -------------------------------------------------------------------------------------------------
+@formatOutput
+def print_badchars(length, format=None):
+    """Print bad characters."""
+    if format is None:
+        for x in range(1, length + 1):
+            sys.stdout.write("\\x" + "{:02x}".format(x))
+    else:
+        linebreak = 16
+        rows = int(math.ceil(float(length) / linebreak))
+        count = 0
+        for row in range(1, rows + 1):
+            sys.stdout.write(FORMATS[format]["line"]["pre"])
+            for char in range(1, linebreak + 1):
+                if count == length:
+                    break
+                count += 1
+                sys.stdout.write("\\x" + "{:02x}".format(count))
+            if count == length:
+                break
+            sys.stdout.write(FORMATS[format]["line"]["post"])
+            sys.stdout.write("\n")
+
+
+# -------------------------------------------------------------------------------------------------
+# ARG HELPER
+# -------------------------------------------------------------------------------------------------
+def _args_check_length(value):
+    """Check arguments for valid length."""
+    min_len = 1
+    intvalue = int(value)
+
+    if intvalue < min_len:
+        raise argparse.ArgumentTypeError("%s is an invalid length." % value)
+    return intvalue
+
+
+def _args_check_format(value):
+    """Check arguments for valid format."""
+    if value not in FORMATS:
+        raise argparse.ArgumentTypeError("%s is an invalid format." % value)
+    return value
+
+
+# -------------------------------------------------------------------------------------------------
+# ENTRYPOINT
+# -------------------------------------------------------------------------------------------------
+def main():
+    """Start the program."""
+    parser = argparse.ArgumentParser(description="Badchar generator.")
+    parser.add_argument(
+        "-v",
+        "--version",
+        action="version",
+        version="%(prog)s 0.2 by cytopia",
+        help="Show version information,",
+    )
+    parser.add_argument(
+        "-l",
+        "--length",
+        metavar="int",
+        required=False,
+        type=_args_check_length,
+        help="Length of badchars to create. Default: " + str(DEFAULT_LENGTH),
+    )
+    parser.add_argument(
+        "-f",
+        "--format",
+        metavar="str",
+        required=False,
+        type=_args_check_format,
+        help="Format output: " + ", ".join(FORMATS.keys()),
+    )
+    args = parser.parse_args()
+    length = DEFAULT_LENGTH if args.length is None else args.length
+
+    print_badchars(length, args.format)
+    sys.stdout.write("\n")
+
+
+if __name__ == "__main__":
+    # Catch Ctrl+c and exit without error message
+    try:
+        main()
+    except KeyboardInterrupt:
+        print()
+        sys.exit(1)
