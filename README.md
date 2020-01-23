@@ -1,5 +1,6 @@
 # badchars
 
+[![](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![PyPI](https://img.shields.io/pypi/v/badchars)](https://pypi.org/project/badchars/)
 [![PyPI - Status](https://img.shields.io/pypi/status/badchars)](https://pypi.org/project/badchars/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/badchars)](https://pypi.org/project/badchars/)
@@ -7,9 +8,10 @@
 [![PyPI - Implementation](https://img.shields.io/pypi/implementation/badchars)](https://pypi.org/project/badchars/)
 [![PyPI - License](https://img.shields.io/pypi/l/badchars)](https://pypi.org/project/badchars/)
 
+[![Build Status](https://github.com/cytopia/badchars/workflows/linting/badge.svg)](https://github.com/cytopia/badchars/actions?workflow=linting)
+
 A hex bad char generator to instruct encoders such as [shikata-ga-nai](https://github.com/rapid7/metasploit-framework/blob/master/modules/encoders/x86/shikata_ga_nai.rb)
 to transform those to other chars.
-
 
 
 ## Installation

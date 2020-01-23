@@ -9,6 +9,7 @@ endif
 
 
 VERSION = 2.7
+BINNAME = badchars
 
 # -------------------------------------------------------------------------------------------------
 # Default Target
@@ -29,13 +30,13 @@ help:
 lint: pycodestyle pydocstyle black
 
 pycodestyle:
-	docker run --rm -v $(PWD):/data cytopia/pycodestyle --show-source --show-pep8 badchars
+	docker run --rm -v $(PWD):/data cytopia/pycodestyle --show-source --show-pep8 $(BINNAME)
 
 pydocstyle:
-	docker run --rm -v $(PWD):/data cytopia/pydocstyle badchars
+	docker run --rm -v $(PWD):/data cytopia/pydocstyle $(BINNAME)
 
 black:
-	docker run --rm -v ${PWD}:/data cytopia/black -l 100 badchars
+	docker run --rm -v ${PWD}:/data cytopia/black -l 100 --check --diff $(BINNAME)
 
 
 # -------------------------------------------------------------------------------------------------
@@ -110,8 +111,8 @@ autoformat:
 		$$(tty -s && echo "-it" || echo) \
 		-v $(PWD):/data \
 		-w /data \
-		cytopia/black -l 100 badchars
+		cytopia/black -l 100 $(BINNAME)
 clean:
-	-rm -rf badchars.egg-info/
+	-rm -rf $(BINNAME).egg-info/
 	-rm -rf dist/
 	-rm -rf build/
