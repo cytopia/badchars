@@ -113,7 +113,7 @@ def main():
         "-v",
         "--version",
         action="version",
-        version="%(prog)s 0.3 by cytopia",
+        version="%(prog)s 0.4.0 by cytopia",
         help="Show version information,",
     )
     parser.add_argument(

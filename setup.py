@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="badchars",
-    version="0.3",
+    version="0.4.0",
     description="A hex badchar generator for different programming languages.",
     license="MIT",
     long_description=long_description,
