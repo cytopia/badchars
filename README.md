@@ -14,13 +14,13 @@ A hex bad char generator to instruct encoders such as [shikata-ga-nai](https://g
 to transform those to other chars.
 
 
-## Installation
+## :tada: Installation
 ```bash
 pip install badchars
 ```
 
 
-## Usage
+## :computer: Usage
 ```
 $ badchars --help
 usage: badchars [-h] [-v] [-l int] [-f str]
@@ -35,7 +35,7 @@ optional arguments:
 ```
 
 
-## Examples
+## :bulb: Examples
 
 #### Plain
 ```bash
@@ -144,7 +144,36 @@ $badchars =
 ```
 
 
-## License
+## :lock: [cytopia](https://github.com/cytopia) sec tools
+
+Below is a list of other sec tools I am maintaining.
+
+| Tool                 | Category             | Language   | Description |
+|----------------------|----------------------|------------|-------------|
+| **[smtp-user-enum]** | Enumeration          | Python 2+3 | SMTP users enumerator |
+| **[urlbuster]**      | Enumeration          | Python 2+3 | Mutable web directory fuzzer |
+| **[netcat]**         | Pivoting             | Python 2+3 | Cross-platform netcat |
+| **[badchars]**       | Reverse Engineering  | Python 2+3 | Badchar generator |
+| **[fuzza]**          | Reverse Engineering  | Python 2+3 | TCP fuzzing tool |
+
+[netcat]: https://github.com/cytopia/netcat
+[smtp-user-enum]: https://github.com/cytopia/smtp-user-enum
+[urlbuster]: https://github.com/cytopia/urlbuster
+[badchars]: https://github.com/cytopia/badchars
+[fuzza]: https://github.com/cytopia/fuzza
+
+
+## :octocat: Contributing
+
+See **[Contributing guidelines](CONTRIBUTING.md)** to help to improve this project.
+
+
+## :exclamation: Disclaimer
+
+This tool may be used for legal purposes only. Users take full responsibility for any actions performed using this tool. The author accepts no liability for damage caused by this tool. If these terms are not acceptable to you, then do not use this tool.
+
+
+## :page_facing_up: License
 
 **[MIT License](LICENSE.txt)**
 
