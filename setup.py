@@ -29,8 +29,6 @@ setup(
         "Intended Audience :: Science/Research",
         "Intended Audience :: System Administrators",
         # Project topics
-        "Topic :: Communications :: Chat",
-        "Topic :: Communications :: File Sharing",
         "Topic :: Internet",
         "Topic :: Security",
         "Topic :: System :: Shells",
