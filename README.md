@@ -154,7 +154,7 @@ Below is a list of sec tools and docs I am maintaining.
 | **[header-fuzz]**    | Enumeration          | Bash       | Fuzz HTTP headers |
 | **[smtp-user-enum]** | Enumeration          | Python 2+3 | SMTP users enumerator |
 | **[urlbuster]**      | Enumeration          | Python 2+3 | Mutable web directory fuzzer |
-| **[netcat]**         | Pivoting             | Python 2+3 | Cross-platform netcat |
+| **[pwncat]**         | Pivoting             | Python 2+3 | Cross-platform netcat on steroids |
 | **[badchars]**       | Reverse Engineering  | Python 2+3 | Badchar generator |
 | **[fuzza]**          | Reverse Engineering  | Python 2+3 | TCP fuzzing tool |
 
@@ -162,7 +162,7 @@ Below is a list of sec tools and docs I am maintaining.
 [header-fuzz]: https://github.com/cytopia/header-fuzz
 [smtp-user-enum]: https://github.com/cytopia/smtp-user-enum
 [urlbuster]: https://github.com/cytopia/urlbuster
-[netcat]: https://github.com/cytopia/netcat
+[pwncat]: https://github.com/cytopia/pwncat
 [badchars]: https://github.com/cytopia/badchars
 [fuzza]: https://github.com/cytopia/fuzza
 
