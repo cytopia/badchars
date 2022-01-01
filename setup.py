@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="badchars",
-    version="0.4.0",
+    version="0.5.0",
     description="A hex badchar generator for different programming languages.",
     license="MIT",
     long_description=long_description,
@@ -18,6 +18,11 @@ setup(
     scripts=[
         "badchars"
     ],
+    project_urls={
+        'Source Code': 'https://github.com/cytopia/badchars',
+        'Documentation': 'https://github.com/cytopia/badchars',
+        'Bug Tracker': 'https://github.com/cytopia/badchars/issues',
+    },
     classifiers=[
         # https://pypi.org/classifiers/
         #
