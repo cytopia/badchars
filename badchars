@@ -36,13 +36,18 @@ FORMATS = {
         "line": {"pre": '  "', "post": '"'},
         "char": {"esc": "\\", "delim": ""},
     },
+    "ruby": {
+        "block": {"pre": "badchars = (\n", "post": '"\n)'},
+        "line": {"pre": '  "', "post": '" +'},
+        "char": {"esc": "\\", "delim": ""},
+    },
 }
 
 
 # -------------------------------------------------------------------------------------------------
 # DECORATOR
 # -------------------------------------------------------------------------------------------------
-def formatOutput(f):
+def format_output(f):
     """Decorate/format the output of badchars."""
 
     def new_f(length, format):
@@ -58,7 +63,7 @@ def formatOutput(f):
 # -------------------------------------------------------------------------------------------------
 # FUNCTIONS
 # -------------------------------------------------------------------------------------------------
-@formatOutput
+@format_output
 def print_badchars(length, format=None):
     """Print bad characters."""
     if format is None:
@@ -113,7 +118,7 @@ def main():
         "-v",
         "--version",
         action="version",
-        version="%(prog)s 0.4.0 by cytopia",
+        version="%(prog)s 0.5.0 by cytopia",
         help="Show version information,",
     )
     parser.add_argument(
